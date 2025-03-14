@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+
+    <style>
+    form {
+        width: 60%;
+        margin: 0 auto;
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    label {
+        font-weight: bold;
+    }
+    .btn-primary {
+        margin-top: 1rem;
+    }
+</style>
+
+
+<body>
+<!-- profile_edit.html -->
+<!-- profile_edit.html -->
+<!-- profile_edit.html -->
+<h1>Edit Profile</h1>
+
+<!-- Form for editing profile -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Phone Number -->
+    <div class="form-group">
+        <label for="id_phone_number">Phone Number:</label>
+        {{ form.phone_number }} <!-- This renders the phone number field -->
+    </div>
+
+
+    <!-- Profile Picture -->
+    <div class="form-group">
+        <label for="id_profile_pic">Profile Picture:</label>
+        {{ form.profile_pic }} <!-- This renders the profile pic field -->
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" style="width: 300px;background-color: #333333;">Save Changes</button>
+</form>
+
+
+</body>
+{% endblock %}

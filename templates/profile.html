@@ -1,0 +1,130 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- profile.html -->
+<!-- <h1>Profile of {{ username }}</h1>
+
+<div>
+    <p><strong>Phone Number:</strong> {{ phone_number }}</p>
+    
+    {% if profile_pic %}
+        <img src="{{ profile_pic }}" alt="Profile Picture" width="100" height="100">
+    {% else %}
+        <p><strong>Profile Picture:</strong> Not Provided</p>
+    {% endif %}
+</div>
+
+<- Edit Profile button that redirects to the profile edit page -->
+<!-- <a href="{% url 'profile_edit' %}" class="btn btn-primary">Edit Profile</a> --> 
+
+<style>
+    .about-heading {
+        margin-left: 50px; /* Center manually, better for larger screens */
+        margin-top: 20px;
+        font-size: 20px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-align: center; /* Align the heading content */
+    }
+    
+    .about-heading h3 {
+        font-size: 36px; /* Make the heading more prominent */
+        font-weight: bold;
+        color: #333333; /* A dark neutral tone for elegance */
+        text-transform: uppercase; /* Ensure uniform text appearance */
+        letter-spacing: 2px; /* Slightly increase spacing for readability */
+        /* border-bottom: 2px solid #f89cab; Add an accent border for style */
+        display: inline-block; /* Make border match the heading width */
+        padding-bottom: 5px; /* Add space between text and border */
+        margin-right: 50px;
+    }
+    .content-h3{
+        margin-left: 90px; /* Center manually, better for larger screens */
+        margin-top: 20px;
+        font-size: 20px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-align: center;  
+    }
+    .button-container {
+    display: flex;
+    justify-content: space-between; /* Push buttons to opposite edges */
+    padding: 20px; /* Add some padding around the buttons */
+   
+}
+
+/* Style for the buttons */
+.btn {
+    padding: 10px 20px; /* Add some padding inside the button */
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Text size */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+    
+
+    
+
+    .profile-pic img {
+        display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 0px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 5px;
+      width: 300px;
+      overflow: hidden;
+
+
+      width: 100%;
+      height: auto;
+      
+    }
+
+    .content {
+      padding: 15px;
+    }
+
+    .content h1 {
+        margin-top: 20px;
+      font-size: 2.2rem;
+      font-family: 'Times New Roman', Times, serif;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .user-info-p{
+        font-size: 25px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .content p {
+      font-size: 1.5rem;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    </style>
+    <body>
+    <div class="about-heading"> 
+        <h3>PROFILE</h3>
+    </div>
+    <div class="profile-details" style="text-align: center;">
+        <div class="profile-pic" style="padding: 20px; max-width: 300px; margin: auto;">
+            {% if profile_pic %}
+                <img src="{{ profile_pic }}" alt="Profile Picture" width="150" height="150" >
+            {% else %}
+                <img src="{% static 'default-profile.png' %}" alt="Default Profile Picture" width="150" height="150" style="margin-left: 1000px ;">
+            {% endif %}
+        </div>
+        <div class="user-info">
+            
+     <p><strong>Name:</strong> {{ username }}</p>
+     <p><strong>Phone Number:</strong> {{ phone_number }}</p>
+            
+        </div>
+        <a href="{% url 'profile_edit' %}" class="btn btn-primary" style="width: 300px;background-color: #333333;margin-bottom: 20px;">Edit Profile</a>
+    </body>
+    {% endblock %}

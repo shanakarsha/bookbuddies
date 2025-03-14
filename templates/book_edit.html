@@ -1,0 +1,52 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <body>
+        <div class="container" style="padding: 20px; max-width: 800px; margin: auto;">
+            <h2>Edit Book: {{ book.title }}</h2>
+    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Title field -->
+                <div class="mb-3">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="mb-3">
+                    {{ form.author.label_tag }}
+                    {{ form.author }}
+                </div>
+                <div class="mb-3">
+                    {{ form.price.label_tag }}
+                    {{ form.price }}
+                </div>
+                <div class="mb-3">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="mb-3">
+                    {{ form.cover_pic.label_tag }}
+                    {{ form.cover_pic }}
+                </div>
+                <div class="mb-3">
+                    {{ form.book_file.label_tag }}
+                    {{ form.book_file }}
+                </div>
+                <div class="mb-3">
+                    {{ form.genres.label_tag }}
+                    {{ form.genres }}
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-success" style="margin-top: 10px;">Save</button>
+            </form>
+    
+            <!-- Cancel Button (Redirect to the blog detail page) -->
+            <a href="{% url 'book_detail' book.id %}" class="btn btn-secondary" style="margin-top: 10px;width: 300px;background-color: #333333;">Cancel</a>
+        </div>
+    </body>
+    
+</body>
+{% endblock %}

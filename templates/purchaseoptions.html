@@ -1,0 +1,45 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    
+
+        .options-container {
+            background: rgb(18, 202, 168);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .book-id {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        
+        
+
+        
+</style>
+<body>
+    <div class="options-container">
+        <form action="{% url 'payment_methods' pk=book.pk %}" method="POST">
+
+            <h2 style="margin-bottom: 50px;">Book: {{ book.title }}</h2>
+
+            {% csrf_token %}
+            <button type="submit" class="option-btn" style="width: 280px;height:50px;background-color: #333333;color:white;margin-bottom: 20px;">Buy Now</button>
+        </form>
+        <form action="{% url 'add_to_cart' book.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" style="width: 280px;height:50px;background-color: #333333;color:white;margin-bottom: 20px;">🛒 AddCart</button>
+        </form>
+        <form action="{% url 'payment_selection_download' pk=book.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="option-btn" style="width: 280px;height:50px;margin-bottom:300px;background-color:  #333333;color:white;box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);">Read by Download</button>
+        </form>
+    </div>
+</body>
+{% endblock %}

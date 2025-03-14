@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Site Metas -->
+        <link rel="icon" href="{% static 'images/favicon.png'%}" type="image/gif" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap CSS (Already needed for styles) -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Bundle with Popper.js -->
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+        
+        <title> BOOKBUDDIES</title>
+      
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}" />
+        <!-- font awesome style -->
+        <link href="{% static 'css/font-awesome.min.css'%}" rel="stylesheet" />
+      
+        <!-- Custom styles for this template -->
+       
+        <link href="{% static 'css/style.css'%}" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+        <!-- js style -->
+        <link href="{% static 'js/bootstrap.js' %}" rel="stylesheet" />
+        <link href="{% static 'js/custom.js' %}" rel="stylesheet" />
+        <link href="{% static 'js/ion.rangeSlider.min.js' %}" rel="stylesheet" />
+        <link href="{% static 'js/jquery-3.4.1.min.js' %}" rel="stylesheet" />
+        <!-- animations -->
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+
+      </head>
+      
+<body>
+    <div>
+    {% include 'layout/nav.html' %}
+    
+    {% block content %}
+    
+    {% endblock %}
+    
+    {% include 'layout/footter.html' %} 
+    </div>   
+    <scirpt src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></scirpt>
+</body>

@@ -1,0 +1,143 @@
+{% load static %}
+<style>
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.website-name {
+    font-family: 'Amatic SC', cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e9ecef;
+    letter-spacing: 2px;
+    animation: fadeIn 2s ease-in-out;
+}
+.navbar, .dropdown-menu {
+    font-family: 'Poppins', sans-serif;  /* Change to your preferred font */
+    font-size: 16px; /* Adjust as needed */
+}
+.dropdown-item:focus, 
+.dropdown-item:active {
+    background-color: transparent !important; /* Removes blue highlight */
+    color: inherit !important; /* Keeps the original font color */
+    outline: none !important;
+}
+.dropdown-item:hover {
+    background-color: #324b65; /* Light gray like Bootstrap */
+    color: #fefdfd;
+}
+
+</style>
+<header class="header_section">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" href="{% url 'index' %}">
+          <span >
+            <div class="website-name">
+              BookBuddies!!
+          </div>
+          </span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""> </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item active" style="margin-left: 15px;">
+              <a class="nav-link pl-lg-0" href="{% url 'index'%}">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}"> ABOUT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'categories'%}">CATEGORIES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'blog'%}">
+                BOOKS
+              </a>
+            {% if request.user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_books'%}">
+                ADDBOOKS
+              </a>
+              {% endif %}
+            {% if request.user.is_authenticated %}
+          
+            
+           
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile'%}">
+                PROFILE
+              </a> -->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signout'%}">
+                LOGOUT
+              </a>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'changepassword'%}">
+                  CHANGEPASSWORD
+                </a>    
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="{% url 'book-recommendations'%}">
+                    reco
+                  </a>    -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                       OPTIONS
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'profile' %}">PROFILE</a></li>
+                        <li><a class="dropdown-item" href="{% url 'book-recommendations' %}">BOOK RECOMMENDATIONS</a></li>
+                    </ul>
+                </li>
+                
+                  
+              <li class="nav-item">
+                  <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <i class="bi bi-search-heart"></i>
+                  </a>
+               </li>  
+               <li class="nav-item" style="margin-right: 15px;">
+                <a href="{% url 'cart_detail' %}" class="cart-icon-container">
+                  <div class="cart-icon" style="margin-right: 23px;">
+                      🛒
+                      <!-- Cart Item Count Badge -->
+                      <span class="cart-count" style="margin-right: 23px;">{{ request.user.cart_set.count }}</span>
+                  </div>
+              </a>
+              </li>  
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signup'%}">
+              SIGNUP
+            </a>  
+          </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signin'%}">
+                LOGIN
+              </a> 
+            </li> 
+            
+          {% endif %}
+          </ul>
+          <form class="search_form" method="get" action="{% url 'search' %}">
+            <input type="text" class="form-control" name="q" placeholder="Search here..." value="{{ query }}">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </form>
+        
+        
+        </div>
+      </nav>
+    </div>
+  </header>

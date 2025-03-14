@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <div class="text-center">
+        <h2 class="" style="margin-top: 25px;text-transform: uppercase;font-weight: bold;text-align: center;">
+          LOGIN
+        </h2>
+        </div>
+        <form id="loginForm" action="{% url 'signin' %}" method="post">
+          {% csrf_token %}
+          <div class="container py-4">
+              <!-- Username Field -->
+              <div class="mb-3">
+                  <label for="{{ form.username.id_for_label }}">Username</label>
+                  <input type="text" name="username" class="form-control" id="{{ form.username.id_for_label }}" placeholder="Enter username">
+                  {% if form.username.errors %}
+                      <div class="text-danger">
+                          {% for error in form.username.errors %}
+                              <p>{{ error }}</p>
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+              </div>
+      
+              <!-- Password Field -->
+              <div class="mb-3">
+                  <label for="{{ form.password.id_for_label }}">Password</label>
+                  <input type="password" name="password" class="form-control" id="{{ form.password.id_for_label }}" placeholder="Enter password">
+                  {% if form.password.errors %}
+                      <div class="text-danger">
+                          {% for error in form.password.errors %}
+                              <p>{{ error }}</p>
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+              </div>
+      
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary"style="width: 300px;background-color: #333333;">Login</button>
+          </div>
+      </form>
+      {% if form.field.errors %}
+    <div class="text-danger">
+        {% for error in form.field.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+</body>
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+
+<body >
+  <div class="cart-container">
+    <h2 class="cart-title">Your Cart</h2>
+
+    {% if cart_items %}
+    <div class="cart-items">
+        {% for item in cart_items %}
+        <div class="cart-item">
+            <img src="{{ item.book.cover_pic.url }}" alt="{{ item.book.title }}" class="book-image">
+            <div class="cart-details">
+                <h3>{{ item.book.title }}</h3>
+                <p class="price">Price: ₹{{ item.book.price }}</p>
+                <p class="total">Total: ₹{{ item.total_price }}</p>
+                <form action="{% url 'update_cart' item.book.id %}" method="POST" class="cart-form">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="quantity-input">
+                    <button type="submit" class="btn update-btn" style="width: 280px;height:40px;background-color: #333333;color:white;margin-bottom: 20px;">Update</button>
+                </form>
+                <form action="{% url 'remove_from_cart' item.book.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn remove-btn" style="width: 280px;height:40px;background-color: #333333;color:white;margin-bottom: 20px;margin-left: 60px;">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cart-summary">
+        <h3>Total: ₹{{ total_amount }}</h3>
+        <form action="{% url 'clear_cart' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn clear-btn">Clear Cart</button>
+        </form>
+        <form action="{% url 'cartcreate_checkout_session' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="amount" value="{{ total_amount }}">
+            <button type="submit" class="btn checkout-btn">Proceed to Checkout</button>
+        </form>
+        <!-- <a href="" class="btn checkout-btn">Proceed to Checkout</a> -->
+    </div>
+
+    {% else %}
+    <p class="empty-cart">Your cart is empty.</p>
+    {% endif %}
+  </div>
+</body>
+
+<style>
+    .cart-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .cart-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .cart-items {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-image {
+        width: 80px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 20px;
+    }
+
+    .cart-details {
+        flex: 1;
+    }
+
+    .cart-form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quantity-input {
+        width: 50px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .update-btn {
+        background: #007bff;
+        color: white;
+    }
+
+    .remove-btn {
+        background: #dc3545;
+        color: white;
+    }
+
+    .clear-btn {
+        background: #6c757d;
+        color: white;
+    }
+
+    .checkout-btn {
+        background: #28a745;
+        color: white;
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        text-decoration: none;
+    }
+
+    .cart-summary {
+        text-align: center;
+        margin-top: 30px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .empty-cart {
+        text-align: center;
+        font-size: 18px;
+        color: #777;
+    }
+</style>
+
+
+
+<!-- <body >
+    
+    <h2>Your Cart</h2>
+    
+    {% if cart_items %}
+    <table style="text-align: center;">
+        <tr style="width: 750px;">
+            <th>Book</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        {% for item in cart_items %}
+        <tr style="text-align: center;" >
+            <td>{{book.cover_pic}}{{ item.book.title }}</td>
+            <td>₹{{ item.book.price }}</td>
+            <td>
+                <form action="{% url 'update_cart' item.book.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                    <button type="submit" style="width: 280px;height:40px;background-color: #333333;color:white;margin-bottom: 20px;">Update</button>
+                </form>
+            </td>
+            <td>₹{{ item.total_price }}</td>
+            <td>
+                <form action="{% url 'remove_from_cart' item.book.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" style="width: 280px;height:40px;background-color: #333333;color:white;margin-bottom: 20px;">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <h3>Total: ₹{{ total_amount }}</h3>
+    
+    <form action="{% url 'clear_cart' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" style="width: 280px;height:40px;background-color: #333333;color:white;margin-bottom: 20px;">Clear Cart</button>
+    </form>
+    
+    <a href="" class="btn">Proceed to Checkout</a>
+    
+    {% else %}
+    <p>Your cart is empty.</p>
+    {% endif %}
+    
+ 
+    
+
+
+</body> -->
+{% endblock %}

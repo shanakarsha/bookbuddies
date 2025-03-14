@@ -1,0 +1,95 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.book-ite img {
+  width: 400px;  /* Adjust width */
+  height: 450px; /* Adjust height */
+  object-fit: cover; /* Ensures proper scaling */
+  border-radius: 5px; /* Optional: Rounded corners */
+  display: block;
+  margin: 0 auto;
+}
+</style>
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    
+    <!-- end header section -->
+  </div>
+
+  <!-- blog section -->
+
+  
+  <section class="blog_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2 style="
+        text-align: center;
+        font-size: 35px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-align: center;  ">OUR BOOKS</h2>
+      </div>
+      <div class="book-ite">
+      <div class="row">
+        {% for book in books %}
+          <div class="col-md-6">
+            <div class="box">
+              <div class="img-box">
+                {% if book.cover_pic %}
+                  <img src="{{ book.cover_pic.url }}" alt="{{ book.title }}" class="cover-image">
+                {% else %}
+                  <img src="{% static 'images/default_cover.jpg' %}" alt="Default Cover">
+                {% endif %}
+                <h4 class="blog_date">
+                  <span>{{ today }}</span>
+                </h4>
+              </div>
+              <div class="detail-box">
+                <h5>{{ book.title }}</h5>
+                <p>{{ book.description|truncatewords:30 }}</p>
+               <h5> ₹{{ book.price }}</h5>
+                <div>
+                  <!-- <h2>Average Rating:</h2> -->
+                  <div>
+                      {% with book.avg_rating as rating %}
+                          {% for i in "12345"|make_list %}
+                              {% if forloop.counter <= rating %}
+                                  <span style="color: gold;">&#9733;</span>  <!-- Full star -->
+                              {% elif forloop.counter|add:0.5 <= rating %}
+                                  <span style="color: gold;">&#9734;&#9733;</span>  <!-- Half star -->
+                              {% else %}
+                                  <span>&#9734;</span>  <!-- Empty star -->
+                              {% endif %}
+                          {% endfor %}
+                      {% endwith %}
+                  </div>
+              </div>
+              
+              
+              
+              <p> {{ book.avg_rating }}</p><!--here the avg rating is displayed-->
+            
+                <a href="{% url 'book_detail' book.id %}">
+                  Read More
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    </div>
+  </section>
+  
+
+  <!-- end blog section -->
+
+  <!-- info section -->
+
+  
+
+</body>
+
+
+{% endblock %}

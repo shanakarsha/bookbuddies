@@ -1,0 +1,50 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .rating-container {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+select {
+    font-size: 16px;
+    padding: 5px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+</style>
+<body>
+    <div class="rating-container">
+        <h3>{{ book.title }}</h3>
+        <p>Average Rating: {{ book.average_rating|floatformat:1 }} ⭐</p>
+    
+        {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="rating">Your Rating:</label>
+            {{ form.rating }}
+            <button type="submit">Submit</button>
+        </form>
+        {% else %}
+        <p><a href="{% url 'signup' %}">Login</a> to rate this book.</p>
+        {% endif %}
+    </div>
+    
+</body>
+
+
+{% endblock %}

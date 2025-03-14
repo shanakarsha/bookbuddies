@@ -1,0 +1,58 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .book-section {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .book-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 3 books per row */
+        gap: 20px; /* Space between books */
+        text-align: center;
+    }
+
+    .book-item img {
+        width: 400px;  /* Adjust width */
+        height: 450px; /* Adjust height */
+        object-fit: cover; /* Ensures proper scaling */
+        border-radius: 5px; /* Optional: Rounded corners */
+        display: block;
+        margin: 0 auto;
+    }
+
+    .book-title {
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>
+
+<!-- Heading -->
+<div class="book-section">
+    <h2 style="
+    margin-top: 20px;
+    text-align: center;
+    font-size: 35px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;  ">📚 BOOK RECOMMENDATIONS</h2>
+</div>
+
+<!-- Book Grid -->
+<div class="book-grid">
+    {% for book in recommended_books %}
+        <div class="book-item">
+            <a href="{% url 'book_detail' book.id %}">
+                <img src="{{ book.cover_pic.url }}" alt="{{ book.title }} Cover">
+            </a>
+            <div class="book-title">{{ book.title }}</div>
+        </div>
+    {% empty %}
+        <p>No recommendations available yet.</p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

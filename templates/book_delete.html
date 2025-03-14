@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <div class="container" style="padding: 20px; max-width: 800px; margin: auto;">
+        <h2>Are you sure you want to delete the blog: "{{ book.title }}"?</h2>
+    
+        <form method="POST" >
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        </form>
+    
+        <a href="{% url 'book_detail' book.id %}" class="btn btn-secondary" style="margin-top: 10px;width: 300px;background-color: #333333;">Cancel</a>
+    </div>
+</body>
+{% endblock %}

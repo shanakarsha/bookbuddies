@@ -1,0 +1,54 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    
+        h2 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .payment-options {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .payment-options input {
+            margin-right: 10px;
+        }
+
+       
+
+        .proceed-btn {
+            background-color: #ff5a5f;
+            color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        .proceed-btn:hover {
+            background-color: #e0484d;
+            transform: scale(1.05);
+        }
+
+       
+</style>
+<body>
+    <h2>Choose Payment Method for {{ book.title }} - ₹{{ book.price }}</h2>
+
+<form action="{% url 'create-checkout-session' pk=book.id %}" method="POST">
+    {% csrf_token %}
+    <input type="radio" name="payment_method" value="cash_on_delivery"> Cash on Delivery<br>
+    <input type="radio" name="payment_method" value="upi"> UPI<br>
+    <input type="radio" name="payment_method" value="card"> Card<br>
+    <button type="submit" class="btn" style="width: 280px;height:50px;background-color: #333333;color:white;margin-bottom: 20px;text-align: center;">Proceed with payment</button>
+</form>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn" style="width: 280px;height:50px;background-color: #333333;color:white;margin-bottom: 70px;">Cash on Delivery</button>
+</form>
+
+</body>
+{% endblock %}

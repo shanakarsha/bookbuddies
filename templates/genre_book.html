@@ -1,0 +1,28 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Books in {{ genre.name }}</h1>
+<section class="blog_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>OUR BOOKS</h2>
+    </div>
+    <div class="row">
+      {% for book in books %}
+        <div class="col-md-4">
+          <div class="card">
+            <img src="{{ book.cover_pic.url }}" alt="{{ book.title }}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{ book.title }}</h5>
+              <p class="card-text">{{ book.description|truncatewords:30 }}</p>
+              <a href="{% url 'book_detail' book.id %}" class="btn btn-primary" style="width: 300px;background-color: #333333;">Read More</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<a href="{% url 'categories' %}">Back to Genres</a>
+
+{% endblock %}

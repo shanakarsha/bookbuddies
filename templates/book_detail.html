@@ -59,10 +59,7 @@
             <a href="{% url 'purchase-options' book.pk %}" class="btn edit-button" style="background-color: #333333;width: 75px;height: 40px;">Next</a>
             <a href="{% url 'rate' book.pk %}" class="btn edit-button" style="background-color: #333333;width: 75px;height: 40px;">Rate</a>
             {% endif %}
-            <!-- <form action="{% url 'add_to_cart' book.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" style="width: 75px;height: 45px;">🛒 AddCart</button>
-            </form> -->
+           
         {% if request.user.is_superuser %}
         <a href="{% url 'book_edit' book.id %}" class="btn edit-button" style="background-color: #333333;width: 75px;height: 40px;">Edit</a>
         <a href="{% url 'book_delete' book.id %}" class="btn btn-danger" style="background-color: #333333;width: 75px;height: 40px;">Delete</a>
